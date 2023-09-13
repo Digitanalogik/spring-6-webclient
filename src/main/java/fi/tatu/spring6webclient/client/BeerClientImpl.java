@@ -1,5 +1,6 @@
 package fi.tatu.spring6webclient.client;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -35,5 +36,13 @@ public class BeerClientImpl implements BeerClient {
                 .uri(API_URL, Map.class)
                 .retrieve()
                 .bodyToFlux(Map.class);}
+
+    @Override
+    public Flux<JsonNode> listBeersJsonNode() {
+        return webClient.get()
+                .uri(API_URL, JsonNode.class)
+                .retrieve()
+                .bodyToFlux(JsonNode.class);
+    }
 
 }
