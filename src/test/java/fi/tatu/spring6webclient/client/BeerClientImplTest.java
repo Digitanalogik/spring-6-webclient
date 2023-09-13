@@ -37,7 +37,7 @@ class BeerClientImplTest {
 
         client.listBeersMap()
                 .subscribe(response -> {
-                    log.info(response);
+                    System.out.println(response);
                     atomicBoolean.set(true);
                 });
 
@@ -56,4 +56,18 @@ class BeerClientImplTest {
 
         await().untilTrue(atomicBoolean);
     }
+
+    @Test
+    void listBeersDto() {
+        AtomicBoolean atomicBoolean = new AtomicBoolean(false);
+
+        client.listBeersDto()
+                .subscribe(dto-> {
+                    log.info(dto.getBeerName());
+                    atomicBoolean.set(true);
+                });
+
+        await().untilTrue(atomicBoolean);
+    }
+
 }

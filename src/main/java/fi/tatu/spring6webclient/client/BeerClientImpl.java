@@ -1,6 +1,7 @@
 package fi.tatu.spring6webclient.client;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import fi.tatu.spring6webclient.model.BeerDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -25,7 +26,7 @@ public class BeerClientImpl implements BeerClient {
     @Override
     public Flux<String> listBeers() {
         return webClient.get()
-                .uri(API_URL, String.class)
+                .uri(API_URL)
                 .retrieve()
                 .bodyToFlux(String.class);
     }
@@ -33,16 +34,23 @@ public class BeerClientImpl implements BeerClient {
     @Override
     public Flux<Map> listBeersMap() {
         return webClient.get()
-                .uri(API_URL, Map.class)
+                .uri(API_URL)
                 .retrieve()
                 .bodyToFlux(Map.class);}
 
     @Override
     public Flux<JsonNode> listBeersJsonNode() {
         return webClient.get()
-                .uri(API_URL, JsonNode.class)
+                .uri(API_URL)
                 .retrieve()
                 .bodyToFlux(JsonNode.class);
     }
 
+    @Override
+    public Flux<BeerDTO> listBeersDto() {
+        return webClient.get()
+                .uri(API_URL)
+                .retrieve()
+                .bodyToFlux(BeerDTO.class);
+    }
 }
