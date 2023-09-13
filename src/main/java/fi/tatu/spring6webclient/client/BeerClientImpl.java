@@ -5,7 +5,9 @@ import fi.tatu.spring6webclient.model.BeerDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.util.UriComponentsBuilder;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.util.Map;
 
@@ -14,6 +16,8 @@ import java.util.Map;
 public class BeerClientImpl implements BeerClient {
 
     private static final String API_URL = "/api/v3/beer";
+    private static final String API_URL_ID = API_URL + "/{beerId}";
+
     private final WebClient webClient;
 
     public BeerClientImpl(WebClient.Builder webClientBuilder) {
@@ -49,5 +53,13 @@ public class BeerClientImpl implements BeerClient {
                 .uri(API_URL)
                 .retrieve()
                 .bodyToFlux(BeerDTO.class);
+    }
+
+    @Override
+    public Mono<BeerDTO> getBeerById(String beerId) {
+        return webClient.get()
+                .uri(uriBuilder -> uriBuilder.path(API_URL_ID).build(beerId))
+                .retrieve()
+                .bodyToMono(BeerDTO.class);
     }
 }
