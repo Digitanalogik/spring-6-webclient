@@ -3,6 +3,7 @@ package fi.tatu.spring6webclient.client;
 import com.fasterxml.jackson.databind.JsonNode;
 import fi.tatu.spring6webclient.model.BeerDTO;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
@@ -71,5 +72,27 @@ public class BeerClientImpl implements BeerClient {
                         .build())
                 .retrieve()
                 .bodyToFlux(BeerDTO.class);
+    }
+
+    @Override
+    public Mono<BeerDTO> createBeer(BeerDTO beerDTO) {
+        return webClient.post()
+                .uri(API_URL)
+                .body(Mono.just(beerDTO), BeerDTO.class)
+                .retrieve()
+                .toBodilessEntity()
+                .flatMap(voidResponseEntity -> Mono.just(voidResponseEntity.getHeaders().get(HttpHeaders.LOCATION).get(0)))
+                .map(path -> path.split("/")[path.split("/").length - 1])
+                .flatMap(this::getBeerById);
+    }
+
+    @Override
+    public Mono<BeerDTO> updateBeer(BeerDTO beerDTO) {
+        return webClient.put()
+                .uri(uriBuilder -> uriBuilder.path(API_URL_ID).build(beerDTO.getId()))
+                .body(Mono.just(beerDTO), BeerDTO.class)
+                .retrieve()
+                .toBodilessEntity()
+                .flatMap(voidResponseEntity -> getBeerById(beerDTO.getId()));
     }
 }
