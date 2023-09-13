@@ -13,14 +13,11 @@ import java.util.Map;
 @Service
 public class BeerClientImpl implements BeerClient {
 
-    private static final String BASE_URL = "http://localhost:8080";
     private static final String API_URL = "/api/v3/beer";
     private final WebClient webClient;
 
     public BeerClientImpl(WebClient.Builder webClientBuilder) {
-        this.webClient = webClientBuilder
-                .baseUrl(BASE_URL)
-                .build();
+        this.webClient = webClientBuilder.build();
     }
 
     @Override
