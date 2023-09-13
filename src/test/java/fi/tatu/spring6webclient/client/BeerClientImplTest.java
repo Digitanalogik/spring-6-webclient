@@ -82,6 +82,19 @@ class BeerClientImplTest {
                 });
 
         await().untilTrue(atomicBoolean);
+    }
 
+    @Test
+    void getBeerByBeerSyle() {
+        AtomicBoolean atomicBoolean = new AtomicBoolean(false);
+
+        client.getBeersByBeerStyle("Pale Ale")
+                .flatMap(dto -> client.getBeerById(dto.getId()))
+                .subscribe(dto-> {
+                    log.info(dto.getBeerName());
+                    atomicBoolean.set(true);
+                });
+
+        await().untilTrue(atomicBoolean);
     }
 }
