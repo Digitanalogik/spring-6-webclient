@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 
+import java.util.Map;
+
 @Slf4j
 @Service
 public class BeerClientImpl implements BeerClient {
@@ -26,4 +28,12 @@ public class BeerClientImpl implements BeerClient {
                 .retrieve()
                 .bodyToFlux(String.class);
     }
+
+    @Override
+    public Flux<Map> listBeersMap() {
+        return webClient.get()
+                .uri(API_URL, Map.class)
+                .retrieve()
+                .bodyToFlux(Map.class);}
+
 }
