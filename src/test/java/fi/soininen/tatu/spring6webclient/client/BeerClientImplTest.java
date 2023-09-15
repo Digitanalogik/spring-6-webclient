@@ -1,17 +1,15 @@
-package fi.tatu.spring6webclient.client;
+package fi.soininen.tatu.spring6webclient.client;
 
-import fi.tatu.spring6webclient.model.BeerDTO;
+import fi.soininen.tatu.spring6webclient.model.BeerDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.math.BigDecimal;
-import java.util.StringTokenizer;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import static org.awaitility.Awaitility.await;
-import static org.junit.jupiter.api.Assertions.*;
 
 @Slf4j
 @SpringBootTest

@@ -1,7 +1,7 @@
-package fi.tatu.spring6webclient.client;
+package fi.soininen.tatu.spring6webclient.client;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import fi.tatu.spring6webclient.model.BeerDTO;
+import fi.soininen.tatu.spring6webclient.model.BeerDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;

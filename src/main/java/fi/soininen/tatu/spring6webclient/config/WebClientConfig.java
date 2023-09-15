@@ -1,4 +1,4 @@
-package fi.tatu.spring6webclient.config;
+package fi.soininen.tatu.spring6webclient.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.reactive.function.client.WebClientCustomizer;

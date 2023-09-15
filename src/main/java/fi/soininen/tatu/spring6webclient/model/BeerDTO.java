@@ -1,4 +1,4 @@
-package fi.tatu.spring6webclient.model;
+package fi.soininen.tatu.spring6webclient.model;
 
 import lombok.Builder;
 import lombok.Data;

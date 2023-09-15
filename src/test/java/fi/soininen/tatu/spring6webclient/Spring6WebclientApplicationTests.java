@@ -1,4 +1,4 @@
-package fi.tatu.spring6webclient;
+package fi.soininen.tatu.spring6webclient;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

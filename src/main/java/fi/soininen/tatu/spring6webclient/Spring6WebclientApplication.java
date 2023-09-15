@@ -1,4 +1,4 @@
-package fi.tatu.spring6webclient;
+package fi.soininen.tatu.spring6webclient;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
